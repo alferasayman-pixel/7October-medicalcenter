@@ -1,4 +1,7 @@
 (() => {
+  document.documentElement.style.colorScheme = 'only light';
+  document.body.style.backgroundColor = '#ffffff';
+  document.body.style.color = '#183537';
   document.querySelectorAll('.reveal').forEach(element => element.classList.add('visible'));
 
   if ('serviceWorker' in navigator) {
