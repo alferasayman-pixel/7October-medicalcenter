@@ -1,4 +1,16 @@
 (() => {
+  document.querySelectorAll('.reveal').forEach(element => element.classList.add('visible'));
+
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations().then(registrations => {
+      registrations.forEach(registration => registration.unregister());
+    }).catch(() => {});
+  }
+
+  if ('caches' in window) {
+    caches.keys().then(keys => Promise.all(keys.map(key => caches.delete(key)))).catch(() => {});
+  }
+
   const menuButton = document.querySelector('.nav-toggle');
   const menu = document.querySelector('.nav-menu');
   const links = [...document.querySelectorAll('.nav-menu a')];
@@ -14,8 +26,8 @@
   if (dateField) dateField.min = new Date().toISOString().split('T')[0];
 
   menuButton?.addEventListener('click', () => {
-    const open = menu.classList.toggle('open');
-    menuButton.setAttribute('aria-expanded', String(open));
+    const open = menu?.classList.toggle('open');
+    menuButton.setAttribute('aria-expanded', String(Boolean(open)));
     menuButton.setAttribute('aria-label', open ? 'إغلاق القائمة' : 'فتح القائمة');
   });
 
@@ -46,21 +58,25 @@
   window.addEventListener('scroll', updateNavigation, { passive: true });
   backTop?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-  const revealObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        revealObserver.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.12 });
-  document.querySelectorAll('.reveal').forEach(element => revealObserver.observe(element));
+  if ('IntersectionObserver' in window) {
+    const revealObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(element => revealObserver.observe(element));
+  }
 
   form?.addEventListener('submit', event => {
     event.preventDefault();
     if (!form.checkValidity()) {
-      status.textContent = 'يرجى استكمال الحقول المطلوبة والموافقة على استخدام البيانات.';
-      status.style.color = '#9b3d28';
+      if (status) {
+        status.textContent = 'يرجى استكمال الحقول المطلوبة والموافقة على استخدام البيانات.';
+        status.style.color = '#9b3d28';
+      }
       form.reportValidity();
       return;
     }
@@ -77,14 +93,12 @@
       `ملاحظات: ${data.get('message') || 'لا توجد'}`
     ].join('\n');
 
-    status.textContent = 'سيتم الآن فتح واتساب لإرسال طلب الموعد.';
-    status.style.color = '#087074';
+    if (status) {
+      status.textContent = 'سيتم الآن فتح واتساب لإرسال طلب الموعد.';
+      status.style.color = '#087074';
+    }
     window.open(`https://wa.me/${centerWhatsApp}?text=${encodeURIComponent(message)}`, '_blank', 'noopener');
   });
-
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => navigator.serviceWorker.register('./service-worker.js').catch(() => {}));
-  }
 
   updateNavigation();
 })();
