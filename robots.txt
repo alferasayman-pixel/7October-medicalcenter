@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://alferasayman-pixel.github.io/7October-medicalcenter/sitemap.xml
