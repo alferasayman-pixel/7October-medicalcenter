@@ -1,0 +1,20 @@
+{
+  "name": "مركز 7 أكتوبر الطبي",
+  "short_name": "7 أكتوبر الطبي",
+  "description": "الموقع الرسمي لمركز 7 أكتوبر الطبي",
+  "lang": "ar",
+  "dir": "rtl",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#064f52",
+  "icons": [
+    {
+      "src": "assets/logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
