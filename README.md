@@ -2,9 +2,11 @@
 
 الموقع الرسمي العربي لمركز **7 أكتوبر الطبي — October 7 Medical Center**، بهوية بصرية تركوازية وذهبية وشعار يرتكز على الرقم 7 وخط النبض.
 
-## رابط الموقع
+## الروابط
 
-[فتح الموقع عبر GitHub Pages](https://alferasayman-pixel.github.io/7October-medicalcenter/)
+- [فتح الموقع عبر GitHub Pages](https://alferasayman-pixel.github.io/7October-medicalcenter/)
+- [تعديل التصميم في Canva](https://www.canva.com/d/rvyebaFNp-JCMTq)
+- [معاينة التصميم في Canva](https://www.canva.com/d/sekwEIwQwN9jze7)
 
 ## المزايا
 
@@ -14,13 +16,20 @@
 - دعم التثبيت كتطبيق ويب PWA والعمل الجزئي دون اتصال.
 - تحسينات الوصول وSEO وملفات Sitemap وRobots.
 - نشر آلي من الفرع `main` عبر GitHub Actions.
+- فرع `gh-pages` جاهز كخيار نشر بديل.
 
 ## تفعيل GitHub Pages لأول مرة
+
+### الطريقة الموصى بها: GitHub Actions
 
 1. افتح **Settings → Pages**.
 2. من **Build and deployment** اختر **GitHub Actions**.
 3. افتح تبويب **Actions** وانتظر اكتمال مهمة `Deploy website to GitHub Pages`.
-4. افتح الرابط الموجود أعلى هذا الملف.
+4. افتح رابط الموقع الموجود أعلى هذا الملف.
+
+### الطريقة البديلة: فرع gh-pages
+
+اختر **Deploy from a branch** ثم الفرع `gh-pages` والمجلد `/(root)`.
 
 ## بيانات يجب تحديثها قبل الإطلاق الرسمي
 
